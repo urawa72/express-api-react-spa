@@ -5,7 +5,8 @@
   "scripts": {
     "dev": "nodemon -L",
     "db:create": "sequelize db:create --config config/database.js",
-    "db:migrate": "sequelize db:migrate --config config/database.js"
+    "db:migrate": "sequelize db:migrate --config config/database.js",
+    "db:rollback": "sequelize db:migrate:undo --config config/database.js"
   },
   "license": "MIT",
   "devDependencies": {

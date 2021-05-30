@@ -1,4 +1,4 @@
-import { Model, Sequelize, DataTypes } from 'sequelize';
+import { Model, Sequelize, DataTypes, Optional } from 'sequelize';
 
 interface UserAttributes {
   id: number;
@@ -7,7 +7,11 @@ interface UserAttributes {
   password: string;
 }
 
-type UserCreationAttributes = Omit<UserAttributes, 'id'>;
+type UserCreationAttributes = Optional<UserAttributes, 'id'>;
+
+// interface UserInstance
+//   extends Model<UserAttributes, UserCreationAttributes>,
+//     UserAttributes {}
 
 export default class User
   extends Model<UserAttributes, UserCreationAttributes>
@@ -40,5 +44,9 @@ export default class User
       },
     );
     return this;
+  }
+
+  public static associate(): void {
+    return;
   }
 }

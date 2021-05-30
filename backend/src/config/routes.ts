@@ -1,6 +1,10 @@
 import { Express } from 'express';
-import { rootController } from '../controllers/root';
+import { getRoot } from '../controllers/root';
+import { getUsers, createUser } from '../controllers/api/users';
 
 export const defineRoutes = (app: Express): void => {
-  app.get('/', rootController);
+  app.get('/', getRoot);
+
+  app.get('/users', getUsers);
+  app.post('/users', createUser);
 };
