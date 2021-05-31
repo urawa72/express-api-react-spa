@@ -1,4 +1,5 @@
 import { Request, Response } from 'express';
+import { genHash } from '../../helpers/bcrypt';
 import db from '../../models';
 
 export const getUsers = async (_: Request, res: Response): Promise<void> => {
@@ -15,13 +16,13 @@ export const createUser = async (
   res: Response,
 ): Promise<void> => {
   try {
-    console.log(req.body);
+    const encrypted = await genHash(req.body.password);
     const user = await db.User.findOrCreate({
       where: { email: req.body.email },
       defaults: {
         name: req.body.name,
         email: req.body.email,
-        password: req.body.password,
+        password: encrypted,
       },
     });
     res.status(200).json(user);

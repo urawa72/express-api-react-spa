@@ -22,9 +22,12 @@ services:
       - 3000:3000
     volumes:
       - .:/backend
+      - node_modules:/backend/node_modules
     depends_on:
       - db
 
 volumes:
+  node_modules:
+    driver: local
   mysql_data:
     driver: local

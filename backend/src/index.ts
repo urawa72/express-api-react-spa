@@ -2,12 +2,14 @@ import express from 'express';
 import { defineRoutes } from './config/routes';
 import { useRequestMiddlewares } from './middlewares/request';
 import { useResponseMiddlewares } from './middlewares/response';
+import { useSecurityMiddlewares } from './middlewares/security';
 
 const app = express();
 
 // middlewares
 useRequestMiddlewares(app);
 useResponseMiddlewares(app);
+useSecurityMiddlewares(app);
 
 // routes
 defineRoutes(app);
