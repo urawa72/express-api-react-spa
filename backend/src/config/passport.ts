@@ -1,9 +1,12 @@
 import passport from 'passport';
 import passportLocal from 'passport-local';
+import passportJwt from 'passport-jwt';
 import { comparePlainWithHash } from '../helpers/bcrypt';
 import db from '../models';
 
 const LocalStrategy = passportLocal.Strategy;
+const JwtStrategy = passportJwt.Strategy;
+const ExtractJwt = passportJwt.ExtractJwt;
 
 export const initStrategy = (): void => {
   passport.use(
@@ -30,7 +33,29 @@ export const initStrategy = (): void => {
             message: 'Logged in successfully.',
           });
         } catch (e) {
-          done(e);
+          done(e, false);
+        }
+      },
+    ),
+  );
+
+  passport.use(
+    'verify',
+    new JwtStrategy(
+      {
+        jwtFromRequest: ExtractJwt.fromAuthHeaderAsBearerToken(),
+        secretOrKey: 'secret',
+      },
+      async (jwtPayload, done) => {
+        try {
+          const user = await db.User.findByPk(jwtPayload.id);
+          if (user) {
+            done(null, user);
+          } else {
+            done(null, false);
+          }
+        } catch (e) {
+          done(e, false);
         }
       },
     ),

@@ -17,16 +17,20 @@ export const createUser = async (
 ): Promise<void> => {
   try {
     const encrypted = await genHash(req.body.password);
-    const user = await db.User.findOrCreate({
+    const count = await db.User.count({
       where: { email: req.body.email },
-      defaults: {
+    });
+    if (count === 0) {
+      const user = await db.User.create({
         name: req.body.name,
         email: req.body.email,
         password: encrypted,
-      },
-    });
-    res.status(200).json(user);
+      });
+      res.status(200).json(user);
+    } else {
+      res.status(400).json('Invalid parameters.');
+    }
   } catch (e) {
-    res.status(500).json('Error occurred');
+    res.status(500).json(e);
   }
 };
