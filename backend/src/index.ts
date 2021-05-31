@@ -3,6 +3,7 @@ import { defineRoutes } from './config/routes';
 import { useRequestMiddlewares } from './middlewares/request';
 import { useResponseMiddlewares } from './middlewares/response';
 import { useSecurityMiddlewares } from './middlewares/security';
+import { useAuthMiddlewares } from './middlewares/auth';
 
 const app = express();
 
@@ -10,6 +11,7 @@ const app = express();
 useRequestMiddlewares(app);
 useResponseMiddlewares(app);
 useSecurityMiddlewares(app);
+useAuthMiddlewares(app);
 
 // routes
 defineRoutes(app);

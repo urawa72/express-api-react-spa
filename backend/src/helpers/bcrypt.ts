@@ -6,3 +6,10 @@ export const genHash = async (
 ): Promise<string> => {
   return await bcrypt.hash(plainText, saltRounds);
 };
+
+export const comparePlainWithHash = async (
+  plainText: string,
+  encrypted: string,
+): Promise<boolean> => {
+  return await bcrypt.compare(plainText, encrypted);
+};
