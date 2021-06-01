@@ -1,10 +1,10 @@
-# @name root
+# @name Root
 GET http://localhost:3000 HTTP/1.1
 Content-Type: application/json
 
 ###
 
-# @name signin
+# @name Signin
 POST http://localhost:3000/signin HTTP/1.1
 Content-Type: application/json
 
@@ -15,19 +15,20 @@ Content-Type: application/json
 
 ###
 
-# @name getUsers
+# @name GetUsers
 GET http://localhost:3000/users HTTP/1.1
 Content-Type: application/json
 Authorization: Bearer
 
 ###
-# @name postUsers
+
+# @name PostUsers
 POST http://localhost:3000/users HTTP/1.1
 Content-Type: application/json
 Authorization: Bearer
 
 {
-  "email": "test8@example.com",
-  "name": "test8",
-  "password": "test8"
+  "email": "test10@example.com",
+  "name": "test10",
+  "password": "test10"
 }
