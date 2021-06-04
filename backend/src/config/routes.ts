@@ -1,7 +1,7 @@
 import { Express } from 'express';
 import { signup, signin, verifyJwt } from '../controllers/api/auth';
 import { getRoot } from '../controllers/root';
-import { getUsers, createUser } from '../controllers/api/users';
+import { getUsers } from '../controllers/api/users';
 
 export const defineRoutes = (app: Express): void => {
   app.get('/', getRoot);
