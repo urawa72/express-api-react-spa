@@ -3,31 +3,15 @@ version: '3'
 services:
   db:
     image: mysql:5.7
+    container_name: mysql_host
+    restart: always
     env_file: ./env/mysql.env
-    environment:
-      - TZ=Asia/Tokyo
     ports:
-      - 3306:3306
+      - "3306:3306"
     volumes:
       - mysql_data:/var/lib/mysql
-
-  app:
-    image: express-backend
-    build:
-      context: .
-      dockerfile: ./Dockerfile
-    environment:
-      - TZ=Asia/Tokyo
-    ports:
-      - 3000:3000
-    volumes:
-      - .:/backend
-      - node_modules:/backend/node_modules
-    depends_on:
-      - db
+      - ./docker/mysql/conf.d:/etc/mysql/conf.d
 
 volumes:
-  node_modules:
-    driver: local
   mysql_data:
     driver: local

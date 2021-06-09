@@ -3,7 +3,7 @@ module.exports = {
     username: 'root',
     password: 'root',
     database: 'api_dev',
-    host: 'db',
+    host: '127.0.0.1',
     port: 3306,
     dialect: 'mysql',
     dialectOptions: {
